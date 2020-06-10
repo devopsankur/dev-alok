@@ -10,11 +10,11 @@ properties([
             script: [
                 $class: 'GroovyScript', 
                 fallbackScript: '', 
-                script: '''// Find relevant AMIs based on their name
+                script: '''
                     bucket = get_bucket_name('dev')
                     return bucket
                     def get_bucket_name(name){
-                        return "alok-${name}".toString()
+                        return "alok-${name}"
                     }
                     '''
         ]
