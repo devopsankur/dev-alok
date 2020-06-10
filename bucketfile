@@ -1,6 +1,5 @@
-def ex(param){
-    currentBuild.result = 'ABORTED'
-    error('BAD PARAM: ' + param)
+def get_bucket_name(param){
+    return "alok-${param}"
 }
 
 pipeline {
@@ -15,9 +14,10 @@ pipeline {
             steps {
                 script {
                     //make some crazy validation
-                    if ("${params.a}" == "DEV") {ex("DEV")}
-                    if ("${params.a}" == "TEST") {ex("TEST")}
-                    if ("${params.a}" == "PROD") {ex("PROD")}
+                    if ("${params.a}" == "DEV") {get_bucket_name("DEV")
+                    }
+                    if ("${params.a}" == "TEST") {get_bucket_name("TEST"}
+                    if ("${params.a}" == "PROD") {get_bucket_name("PROD"}
                 }
             }
         }
