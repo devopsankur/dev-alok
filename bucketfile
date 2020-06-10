@@ -20,7 +20,7 @@ pipeline {
                     //make some crazy validation
                     if ("${params.dev}" != "dev") {ex("dev")}
                     if ("${params.test}" != "test") {ex("test")}
-                    if ("${params.qa}" != "test") {ex("qa")}
+                    if ("${params.qa}" != "qa") {ex("qa")}
                     if ("${params.prod}" != "prod") {ex("prod")}
                 }
             }
