@@ -1,23 +1,13 @@
-pipeline{
+job('example') {
     parameters {
-        activeChoiceParam('SERVER') {
-            description('Allows user choose from multiple Server')
+        activeChoiceParam('CHOICE-1') {
+            description('Allows user choose from multiple choices')
             filterable()
             choiceType('SINGLE_SELECT')
             groovyScript {
-                script('["dev", "test"]')
+                script('["choice1", "choice2"]')
                 fallbackScript('"fallback choice"')
             }
-        }
-        activeChoiceReactiveParam('BUCKET') {
-            description('Allows user choose from multiple bucket')
-            filterable()
-            choiceType('SINGLE_SELECT')
-            groovyScript {
-                script('["dev-bucket", "test-bucket"]')
-                fallbackScript('"fallback choice"')
-            }
-            referencedParameter('SERVER')
         }
     }
 }
