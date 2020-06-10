@@ -1,36 +1,34 @@
-properties([
-    parameters([
-        [
-            $class: 'ChoiceParameter', 
-            choiceType: 'PT_SINGLE_SELECT', 
-            description: '', 
-            filterable: false, 
-            name: 'Release', 
-            randomName: 'choice-parameter-21337077649621572', 
-            script: [
-                $class: 'GroovyScript', 
-                fallbackScript: '', 
-                script: '''
-                    bucket = get_bucket_name('dev')
-                    return bucket
-                    def get_bucket_name(name){
-                        return "alok-${name}"
-                    }
-                    '''
-        ]
-      ]
-    ])
-])
+def ex(param){
+    currentBuild.result = 'ABORTED'
+    error('BAD PARAM: ' + param)
+}
+
 pipeline {
-   agent any
-	   stages {
-	        stage ('SCM checkout'){
-				  steps {
-				           git branch:'master',
-                           url:'https://github.com/devopsankur/dev-alok.git'
-				        }
-			}
-				      	
-			
+    agent any
+
+    parameters {
+        choice(name: 'dev', choices:"dev", description: "Dev" )
+        choice(name: 'test', choices:"test", description: "Test" )
+        choice(name: 'qa', choices:"qa", description: "Qa?" )
+        choice(name: 'prod', choices:"prod", description: "Prod" )
+    }   
+
+    stages { 
+        stage("check params") {
+            steps {
+                script {
+                    //make some crazy validation
+                    if ("${params.dev}" != "dev") {ex("dev")}
+                    if ("${params.test}" != "test") {ex("test")}
+                    if ("${params.qa}" != "test") {ex("qa")}
+                    if ("${params.prod}" != "prod") {ex("prod")}
+                }
+            }
         }
+        stage("Next stage") {
+            steps {
+                echo "Run"
+            }
+        }
+    }
 }
