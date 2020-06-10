@@ -1,25 +1,23 @@
-pipeline{ 
-    activeChoiceParam('Environment') {
-            description('Select Environment you wan to deploy')
+pipeline{
+    parameters {
+        activeChoiceParam('SERVER') {
+            description('Allows user choose from multiple Server')
+            filterable()
             choiceType('SINGLE_SELECT')
             groovyScript {
-                script('return ['dev', 'qa', 'uat','prod']')
+                script('["dev", "test"]')
                 fallbackScript('"fallback choice"')
             }
-    }
-    activeChoiceReactiveParam('Bucket') {
-            description('Select Bucket from Bitbucket')
+        }
+        activeChoiceReactiveParam('BUCKET') {
+            description('Allows user choose from multiple bucket')
+            filterable()
             choiceType('SINGLE_SELECT')
             groovyScript {
-                script('''
-                    bucket = get_bucket_name(Environment)
-                    return bucket
-                    def get_bucket_name(name){
-                        return "alok-${name}".toString()
-                    } 
-                ''')
+                script('["dev-bucket", "test-bucket"]')
+                fallbackScript('"fallback choice"')
             }
-            referencedParameter('Environment')
+            referencedParameter('SERVER')
+        }
     }
-
 }
