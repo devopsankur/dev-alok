@@ -7,10 +7,7 @@ pipeline {
     agent any
 
     parameters {
-        choice(name: 'dev', choices:"dev", description: "Dev" )
-        choice(name: 'test', choices:"test", description: "Test" )
-        choice(name: 'qa', choices:"qa", description: "Qa?" )
-        choice(name: 'prod', choices:"prod", description: "Prod" )
+        choice(name: 'a', choices:"DEV\nTEST\nPROD", description: "Environment" )
     }   
 
     stages { 
@@ -18,10 +15,9 @@ pipeline {
             steps {
                 script {
                     //make some crazy validation
-                    if ("${params.dev}" != "dev") {ex("dev")}
-                    if ("${params.test}" != "test") {ex("test")}
-                    if ("${params.qa}" != "qa") {ex("qa")}
-                    if ("${params.prod}" != "prod") {ex("prod")}
+                    if ("${params.a}" == "DEV") {ex("DEV")}
+                    if ("${params.a}" == "TEST") {ex("TEST")}
+                    if ("${params.a}" == "PROD") {ex("PROD")}
                 }
             }
         }
