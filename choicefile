@@ -1,6 +1,7 @@
 pipeline{ 
   parameters {
-    choice(name: 'namespace', choices: ['dev', 'test'], description: 'choose env')
+    choice(name: 'namespace', choices: ['dev', 'test'], description: 'choose env')}
+    parameters {
     extendedChoice(name: 'Git/Bucket',quoteValue: false,saveJSONParameterToFile: false,type: 'PT_CHECKBOX', value:'https://github.com/devopsankur/${namespace}_alok.git',description: 'choose git')}
     agent any
 	   stages {
