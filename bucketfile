@@ -14,7 +14,7 @@ pipeline {
             steps {
                 script {
                     //make some crazy validation
-                    if ("${params.a}" == "DEV") {bucket_name=get_bucket_name("DEV") echo ${bucket_name} }
+                    if ("${params.a}" == "DEV") {bucket_name=get_bucket_name("DEV") echo "${bucket_name}" }
                     if ("${params.a}" == "TEST") {get_bucket_name("TEST")}
                     if ("${params.a}" == "PROD") {get_bucket_name("PROD")}
                 }
