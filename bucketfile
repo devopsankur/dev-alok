@@ -1,6 +1,4 @@
-pipeline{ 
-    parameters{
-    activeChoiceParam('Environment') {
+activeChoiceParam('Environment') {
             description('Select Environment you want to deploy')
             choiceType('SINGLE_SELECT')
             groovyScript {
@@ -21,7 +19,8 @@ pipeline{
                 ''')
             }
             referencedParameter('Environment')
-    }
-    }
+}
+pipeline{ 
+    
 
 }
